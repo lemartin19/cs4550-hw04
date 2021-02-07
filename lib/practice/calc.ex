@@ -4,21 +4,44 @@ defmodule Practice.Calc do
     num
   end
 
+  def find_op(expr, op) do
+    Enum.find_index(expr, &String.equivalent?(&1, op))
+  end
+
+  def order_of_op(expr) do
+    find_op(expr, "+") || find_op(expr, "-") || find_op(expr, "*") || find_op(expr, "/")
+  end
+
+  def tree_ops([val]) do
+    parse_float(val)
+  end
+
+  def tree_ops(expr) do
+    idx = order_of_op(expr)
+    start = Enum.slice(expr, 0..(idx - 1))
+    finish = Enum.slice(expr, (idx + 1)..Enum.count(expr))
+    %{a: tree_ops(start), op: Enum.at(expr, idx), b: tree_ops(finish)}
+  end
+
+  def evaluate(%{a: a, op: op, b: b}) do
+    doOp = fn
+      "*" -> evaluate(a) * evaluate(b)
+      "/" -> evaluate(a) / evaluate(b)
+      "+" -> evaluate(a) + evaluate(b)
+      "-" -> evaluate(a) - evaluate(b)
+    end
+
+    doOp.(op)
+  end
+
+  def evaluate(val) do
+    val
+  end
+
   def calc(expr) do
-    # This should handle +,-,*,/ with order of operations,
-    # but doesn't need to handle parens.
     expr
     |> String.split(~r/\s+/)
-    |> hd
-    |> parse_float
-    |> :math.sqrt()
-
-    # Hint:
-    # expr
-    # |> split
-    # |> tag_tokens  (e.g. [+, 1] => [{:op, "+"}, {:num, 1.0}]
-    # |> convert to postfix
-    # |> reverse to prefix
-    # |> evaluate as a stack calculator using pattern matching
+    |> tree_ops
+    |> evaluate
   end
 end
