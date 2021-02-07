@@ -18,10 +18,9 @@ defmodule Practice.Factor do
   end
 
   def factor(num) do
-    if rem(num, 2) == 0 do
-      add_factors(num, 2)
-    else
-      factor(num, 3)
+    cond do
+      rem(num, 2) == 0 -> add_factors(num, 2)
+      true -> factor(num, 3)
     end
   end
 end
