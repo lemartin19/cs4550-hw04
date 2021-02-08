@@ -1,0 +1,34 @@
+Please fill in answers to the questions below:
+
+
+1. What's your name?
+Lynnsey Martin
+
+2. What hostname did you deploy your app to?
+seablue.site
+
+3. What's the URL of your git for this assignment?
+https://github.com/lemartin19/cs4550-hw04.git
+
+4. How much of the functionality did you complete?
+all of it
+
+5. Did you successfully deploy? If not, what's broken?
+yes
+
+6. How comfortable do you feel with Elixir now?
+not super comfortable, but with a working knowledge
+
+7. Which parts of this assignment did you have trouble with, if any?
+parsing the equation for evaluate
+running the deploy script (server elixir version out of date)
+
+And here's a list of tasks for grading comments. Just leave this here:
+ - Task 1
+ - Task 2
+ - Task 3
+ - Task 4
+ - Task 5
+ - Task 6
+ - Task 7
+ - Task 8
